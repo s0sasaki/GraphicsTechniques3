@@ -79,9 +79,6 @@ public:
     GLuint uProjection, uModelview;
     
     void parse(const char* filepath);
-    //void update(float scale);
-    //void spin(glm::vec3 w);
-    //void rescale(float scale);
     
     //sasaki3
     GLuint texture[1];

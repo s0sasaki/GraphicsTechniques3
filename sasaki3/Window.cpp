@@ -4,18 +4,9 @@ const char* window_title = "GLFW Starter Project";
 GLint shaderProgram;
 
 // On some systems you need to change this to the absolute path
-//#define VERTEX_SHADER_PATH "../shader.vert"
-//#define FRAGMENT_SHADER_PATH "../shader.frag"
-#define VERTEX_SHADER_PATH "shader.vert"    //sasaki
-#define FRAGMENT_SHADER_PATH "shader.frag"  //sasaki
+#define VERTEX_SHADER_PATH "shader.vert"
+#define FRAGMENT_SHADER_PATH "shader.frag"
 
-//OBJObject *bunny;
-//OBJObject *dragon;
-//OBJObject *bear;
-
-//OBJObject *point_light;
-//OBJObject *spot_light;
-//OBJObject *dir_light;
 const int NROBOT = 4;
 const int MROBOT = 5;
 Transform *world;
@@ -108,25 +99,7 @@ void Window::initialize_objects()
             righteye2head[i][j]->addChild(new Geometry("eyeball_s.obj"));
         }
     }
-    
-    //bunny = new OBJObject("bunny.obj");
-    //dragon = new OBJObject("dragon.obj");
-    //bear = new OBJObject("bear.obj");
-    //dragon->color = glm::vec3(0.4f, 0.8f, 0.2f);
-    //dragon->diffuseStrength = 0.0f;
-    //bear->color = glm::vec3(0.8f, 0.5f, 1.0f);
-    //bear->specularStrength = 0.0f;
-    //object = bunny;
-    //point_light = new OBJObject("eyeball_s.obj");
-    //point_light->toWorld = point_light->toWorld * glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-    //point_light->toWorld = glm::translate(point_light->toWorld, glm::vec3(point_light_pos));
-    //spot_light = new OBJObject("eyeball_s.obj");
-    //spot_light->toWorld = spot_light->toWorld * glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-    //spot_light->toWorld = glm::translate(spot_light->toWorld, glm::vec3(spot_light_pos));
-    //dir_light = new OBJObject("eyeball_s.obj");
-    //dir_light->toWorld = dir_light->toWorld * glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-    //dir_light->toWorld = glm::translate(dir_light->toWorld, glm::vec3(dir_light_pos));
-    
+ 
     // Load the shader program. Make sure you have the correct filepath up top
 	shaderProgram = LoadShaders(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
 }
@@ -147,12 +120,6 @@ void Window::clean_up()
             delete righteye2head[i][j];
         }
     }
-    //delete bunny;
-    //delete dragon;
-    //delete bear;
-    //delete point_light;
-    //delete spot_light;
-    //delete dir_light;
     glDeleteProgram(shaderProgram);
 }
 
@@ -287,31 +254,6 @@ void Window::display_callback(GLFWwindow* window)
     glUniform1i(loc, toggle_on_dir_light);
     world->draw(shaderProgram, glm::mat4(1.0));
     
-    //loc = glGetUniformLocation(shaderProgram, "diffuseStrength");
-    //glUniform1f(loc, 0.0f);
-    //loc = glGetUniformLocation(shaderProgram, "specularStrength");
-    //glUniform1f(loc, 0.0f);
-    //loc = glGetUniformLocation(shaderProgram, "flagNormColor");
-    //glUniform1i(loc, 0);
-    //
-    //loc = glGetUniformLocation(shaderProgram, "ambientStrength");
-    //glUniform1f(loc, 0.3f+0.7f*toggle_on_point_light);
-    //loc = glGetUniformLocation(shaderProgram, "objectColor");
-    //glUniform3f(loc, point_light_color.x, point_light_color.y, point_light_color.z);
-    //point_light->draw(shaderProgram);
-    //
-    //loc = glGetUniformLocation(shaderProgram, "ambientStrength");
-    //glUniform1f(loc, 0.3f+0.7f*toggle_on_spot_light);
-    //loc = glGetUniformLocation(shaderProgram, "objectColor");
-    //glUniform3f(loc, spot_light_color.x, spot_light_color.y, spot_light_color.z);
-    //spot_light->draw(shaderProgram);
-    //
-    //loc = glGetUniformLocation(shaderProgram, "ambientStrength");
-    //glUniform1f(loc, 0.3f+0.7f*toggle_on_dir_light);
-    //loc = glGetUniformLocation(shaderProgram, "objectColor");
-    //glUniform3f(loc, dir_light_color.x, dir_light_color.y, dir_light_color.z);
-    //dir_light->draw(shaderProgram);
-    
 
 	// Gets events, including input such as keyboard and mouse or window resizing
 	glfwPollEvents();
@@ -331,9 +273,6 @@ void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
 			// Close the window. This causes the program to also terminate.
             glfwSetWindowShouldClose(window, GL_TRUE);
 		}
-        //if (key == GLFW_KEY_F1) object = bunny;
-        //if (key == GLFW_KEY_F2) object = dragon;
-        //if (key == GLFW_KEY_F3) object = bear;
         if (key == GLFW_KEY_N) flag_norm_color = !flag_norm_color;
         if (key == GLFW_KEY_0) toggle_move_object = !toggle_move_object;
         if (key == GLFW_KEY_1 && mods != GLFW_MOD_SHIFT) toggle_move_point_light = !toggle_move_point_light;

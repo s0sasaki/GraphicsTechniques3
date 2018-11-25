@@ -132,18 +132,6 @@ void Geometry::parse(const char *filepath)
         indices.emplace_back(index);
     }
     
-    //glm::vec3 max = vertices[0];
-    //glm::vec3 min = vertices[0];
-    //for( std::vector<glm::vec3>::iterator it=vertices.begin(); it!=vertices.end(); it++){
-    //    if(it->x > max.x) max.x = it->x;
-    //    if(it->y > max.y) max.y = it->y;
-    //    if(it->z > max.z) max.z = it->z;
-    //    if(it->x < min.x) min.x = it->x;
-    //    if(it->y < min.y) min.y = it->y;
-    //    if(it->z < min.z) min.z = it->z;
-    //}
-    //glm::vec3 offset {(max.x + min.x)/2.0, (max.y + min.y)/2.0, (max.z + min.z)/2.0};
-    //GLfloat scale = 10.0/(max.x - min.x);
     glm::vec3 offset {0.0f, 0.0f, 0.0f};
     GLfloat scale {1.0f};
 
@@ -169,24 +157,6 @@ void Geometry::parse(const char *filepath)
 //void OBJObject::draw(float scale, glm::vec3 offset)
 void Geometry::draw(GLint shaderProgram, glm::mat4 M)
 {
-    //// Calculate the combination of the model and view (camera inverse) matrices
-    //glm::mat4 modelview = Window::V * toWorld;
-    //
-    //// We need to calculate this because modern OpenGL does not keep track of any matrix other than the viewport (D)
-    //// Consequently, we need to forward the projection, view, and model matrices to the shader programs
-    //// Get the location of the uniform variables "projection" and "modelview"
-    //uProjection = glGetUniformLocation(shaderProgram, "projection");
-    //uModelview = glGetUniformLocation(shaderProgram, "modelview");
-    //// Now send these values to the shader program
-    //glUniformMatrix4fv(uProjection, 1, GL_FALSE, &Window::P[0][0]);
-    //glUniformMatrix4fv(uModelview, 1, GL_FALSE, &modelview[0][0]);
-    //
-    //// Now draw the object. We simply need to bind the VAO associated with it.
-    //glBindVertexArray(VAO);
-    //// Tell OpenGL to draw with triangles, using the number of indices, the type of the indices, and the offset to start from
-    //glDrawElements(GL_TRIANGLES, indices.size()*3, GL_UNSIGNED_INT, 0);
-    //// Unbind the VAO when we're done so we don't accidentally draw extra stuff or tamper with its bound buffers
-    //glBindVertexArray(0);
     
     setModelMatrix(M);
     render(shaderProgram);
@@ -285,7 +255,6 @@ unsigned char* Geometry::loadPPM(const char* filename, int& width, int& height)
 // load image file into texture object
 void Geometry::loadTexture()
 {
-    //GLuint texture[1];     // storage for one texture
     int twidth, theight;   // texture width/height [pixels]
     unsigned char* tdata;  // texture pixel data
     
